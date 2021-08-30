@@ -3,9 +3,12 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +47,58 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Toast.makeText(getApplicationContext(),"onResume..!",Toast.LENGTH_LONG).show();
+
+        // Task 1
+        Button dCC=findViewById(R.id.DoCCButton);
+        String task1=dCC.getText().toString();
+        dCC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
+                goToTaskDetail.putExtra("task",task1);
+                startActivity(goToTaskDetail);
+            }
+        });
+        // Task 2
+        Button addReadme=findViewById(R.id.AddReadmeButton);
+        String task2=addReadme.getText().toString();
+        addReadme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
+                goToTaskDetail.putExtra("task",task2);
+                startActivity(goToTaskDetail);
+            }
+        });
+        // Task 3
+        Button sleep=findViewById(R.id.SleepButton);
+        String task3=sleep.getText().toString();
+        sleep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
+                goToTaskDetail.putExtra("task",task3);
+                startActivity(goToTaskDetail);
+            }
+        });
+        // SettingsButton
+        Button SettingButton=findViewById(R.id.SettingsButton);
+        SettingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToSettingPage=new Intent(MainActivity.this,Settings.class);
+                startActivity(goToSettingPage);
+            }
+        });
+        String msg=" ’s tasks";
+        //get UserName
+        SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String userName=sharedPreferences.getString("userName","user");
+
+        TextView userTasksView=findViewById(R.id.userTasksView);
+        userTasksView.setText(userName+msg);
+
 
     }
 
