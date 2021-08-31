@@ -1,6 +1,8 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(gotToAllTasks);
             }
         });
+
+        // recyclerview
+        ArrayList<Task> allTasksList=new ArrayList<Task>();
+        allTasksList.add(new Task("Football","football, also called association football or soccer, game in which two teams of 11 players, using any part of their bodies except their hands and arms, try to maneuver the ball into the opposing team’s goal. Only the goalkeeper is permitted to handle the ball and may do so only within the penalty area surrounding the goal. The team that scores more goals wins.","new"));
+        allTasksList.add(new Task("Do Labs","Working on it...","in progress"));
+        allTasksList.add(new Task("Workout","planning for...","assigned"));
+
+        RecyclerView allTasksRecyclerView=findViewById(R.id.TasksListRecyclerView);
+        allTasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        allTasksRecyclerView.setAdapter(new TaskAdapter(allTasksList,this));
+
     }
 
     @Override

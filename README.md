@@ -11,19 +11,26 @@ An Android app that allow the users to manage their tasks.
 * Create Task Detail Page
 * Create Settings Page
 
+**Lab28:**
+**Lab27:**
+* Update Home Page by added RecyclerView.
+* Update Task Detail Page
+
 
 ## Home Page
-![My Tasks](screenshots/newHome.jfif)
+![My Tasks](screenshots/newHome1.jfif)
 
 ## Add Task Page
 ![Add Tasks](screenshots/addTask.jfif)
-
 
 ## All Tasks Page
 ![All Tasks](screenshots/allTasks.jfif)
 
 ## Task Detail Page
 ![Task Detail](screenshots/taskDetail.jfif)
+
+## Updated Task Detail Page
+![Task Detail1](screenshots/taskDetail1.jfif)
 
 ## Settings Page
 ![Task Detail](screenshots/settings.jfif)
