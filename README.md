@@ -12,13 +12,16 @@ An Android app that allow the users to manage their tasks.
 * Create Settings Page
 
 **Lab28:**
-**Lab27:**
 * Update Home Page by added RecyclerView.
 * Update Task Detail Page
 
+**Lab29:**
+* Update Add Task Page so the tasks will be saved in the local database and active total tasks feature.
+* Update Home by make the RecyclerView retrieve all the tasks from thedatabase.
+* Update Task Detail Page
 
 ## Home Page
-![My Tasks](screenshots/newHome1.jfif)
+![My Tasks](screenshots/newHome2.jfif)
 
 ## Add Task Page
 ![Add Tasks](screenshots/addTask.jfif)
@@ -29,10 +32,16 @@ An Android app that allow the users to manage their tasks.
 ## Task Detail Page
 ![Task Detail](screenshots/taskDetail.jfif)
 
-## Updated Task Detail Page
+## Updated Task Detail Page v1
 ![Task Detail1](screenshots/taskDetail1.jfif)
 
 ## Settings Page
 ![Task Detail](screenshots/settings.jfif)
+
+## Updated Task Page
+![Add Tasks](screenshots/addTask1.jfif)
+
+## Updated Task Detail Page v2
+![Task Detail1](screenshots/taskDetail2.jfif)
 
 

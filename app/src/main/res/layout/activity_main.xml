@@ -21,8 +21,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
         android:text="Add Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,62 +33,26 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
         android:text="All Tasks"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.959"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402" />
+        app:layout_constraintVertical_bias="0.392" />
 
     <Button
         android:id="@+id/SettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.392" />
-
-    <Button
-        android:id="@+id/DoCCButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do code challenge"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.004"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
-
-    <Button
-        android:id="@+id/AddReadmeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add README File"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
-
-    <Button
-        android:id="@+id/SleepButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sleep"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957" />
 
     <TextView
         android:id="@+id/userTasksView"

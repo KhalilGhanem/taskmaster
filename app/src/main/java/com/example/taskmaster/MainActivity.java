@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    AppDatabase appDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,49 +56,56 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(getApplicationContext(),"onStart..!",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),"onStart..!",Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(getApplicationContext(),"onResume..!",Toast.LENGTH_LONG).show();
+        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "task").allowMainThreadQueries().build();
+        List<Task>allTasks=appDatabase.taskDao().getAll();
+
+        RecyclerView recyclerView=findViewById(R.id.TasksListRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new TaskAdapter(allTasks,this));
+
+//        Toast.makeText(getApplicationContext(),"onResume..!",Toast.LENGTH_LONG).show();
 
         // Task 1
-        Button dCC=findViewById(R.id.DoCCButton);
-        String task1=dCC.getText().toString();
-        dCC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
-                goToTaskDetail.putExtra("task",task1);
-                startActivity(goToTaskDetail);
-            }
-        });
+//        Button dCC=findViewById(R.id.DoCCButton);
+//        String task1=dCC.getText().toString();
+//        dCC.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
+//                goToTaskDetail.putExtra("task",task1);
+//                startActivity(goToTaskDetail);
+//            }
+//        });
         // Task 2
-        Button addReadme=findViewById(R.id.AddReadmeButton);
-        String task2=addReadme.getText().toString();
-        addReadme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
-                goToTaskDetail.putExtra("task",task2);
-                startActivity(goToTaskDetail);
-            }
-        });
+//        Button addReadme=findViewById(R.id.AddReadmeButton);
+//        String task2=addReadme.getText().toString();
+//        addReadme.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
+//                goToTaskDetail.putExtra("task",task2);
+//                startActivity(goToTaskDetail);
+//            }
+//        });
         // Task 3
-        Button sleep=findViewById(R.id.SleepButton);
-        String task3=sleep.getText().toString();
-        sleep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
-                goToTaskDetail.putExtra("task",task3);
-                startActivity(goToTaskDetail);
-            }
-        });
+//        Button sleep=findViewById(R.id.SleepButton);
+//        String task3=sleep.getText().toString();
+//        sleep.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent goToTaskDetail=new Intent(MainActivity.this,TaskDetail.class);
+//                goToTaskDetail.putExtra("task",task3);
+//                startActivity(goToTaskDetail);
+//            }
+//        });
         // SettingsButton
         Button SettingButton=findViewById(R.id.SettingsButton);
         SettingButton.setOnClickListener(new View.OnClickListener() {
@@ -121,21 +129,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Toast.makeText(getApplicationContext(),"onPause..!",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),"onPause..!",Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(getApplicationContext(),"onStop..!",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),"onStop..!",Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Toast.makeText(getApplicationContext(),"onRestart..!",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),"onRestart..!",Toast.LENGTH_LONG).show();
 
     }
 
