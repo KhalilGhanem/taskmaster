@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         allTasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         allTasksRecyclerView.setAdapter(new TaskAdapter(allTasksList,this));
 
+
+
     }
 
     @Override
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(goToTaskDetail);
 //            }
 //        });
+
         // SettingsButton
         Button SettingButton=findViewById(R.id.SettingsButton);
         SettingButton.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextView userTasksView=findViewById(R.id.userTasksView);
         userTasksView.setText(userName+msg);
-
 
     }
 
