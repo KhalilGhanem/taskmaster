@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.test.espresso.Espresso;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,6 +36,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
     @Rule
     public ActivityScenarioRule<MainActivity> activityScenarioRule
             = new ActivityScenarioRule<>(MainActivity.class);
@@ -50,5 +52,30 @@ public class ExampleInstrumentedTest {
 //        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 //        assertEquals("com.example.taskmaster", appContext.getPackageName());
     }
-   
+    @Test
+    public void testSetting(){
+        onView(withId(R.id.SettingsButton)).perform(click());
+        onView(withId(R.id.SettingsUserName)).perform(typeText("khalil"),closeSoftKeyboard());
+        onView(withId(R.id.SettingsSaveButton)).perform(click());
+        Espresso.pressBackUnconditionally();
+        onView(withId(R.id.userTasksView)).check(matches(withText("khalil ’s tasks")));
+    }
+
+    @Test
+    public void  testRecyclerView(){
+        onView(withId(R.id.TasksListRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
+        onView(withId(R.id.TaskDetailTitle)).check(matches(withText("DO Labs")));
+
+    }
+
+    @Test
+    public void testAddTask(){
+        onView(withId(R.id.button)).perform(click());
+        onView(withId(R.id.editTextTextPersonName)).perform(typeText("lab31"),closeSoftKeyboard());
+        onView(withId(R.id.editTextTextPersonName2)).perform(typeText("Espresso and Polish"),closeSoftKeyboard());
+        onView(withId(R.id.addTaskButton)).perform(click());
+        onView(withId(R.id.TasksListRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(6,click()));
+        onView(withId(R.id.TaskDetailTitle)).check(matches(withText("lab31")));
+
+    }
 }
