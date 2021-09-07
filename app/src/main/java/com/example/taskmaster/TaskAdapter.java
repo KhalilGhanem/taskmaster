@@ -10,22 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
  //RecyclerView.Adapter<StudentAdapter.StudentViewHolder>{
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
-    List<Task> allTasks=new ArrayList<Task>();
+    List<Todo> allTasks=new ArrayList<Todo>();
     Context context;
 
-    public TaskAdapter(List<Task> allTasks, Context context) {
+    public TaskAdapter(List<Todo> allTasks, Context context) {
         this.allTasks = allTasks;
         this.context=context;
     }
 
 
      public static class TaskViewHolder extends RecyclerView.ViewHolder {
-        public Task task;
+        public Todo task;
 
         View itemView;
 
@@ -53,17 +55,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 //         TextView taskBody=holder.itemView.findViewById(R.id.taskBodyInFragment);
          TextView taskState=holder.itemView.findViewById(R.id.taskStateInFragment);
 
-         taskTitle.setText(holder.task.title);
+         taskTitle.setText(holder.task.getTaskTitle());
 //         taskBody.setText(holder.task.body);
-         taskState.setText(holder.task.state);
+         taskState.setText(holder.task.getTaskState());
 
          holder.itemView.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
                  Intent intent=new Intent(context,TaskDetail.class);
-                 intent.putExtra("title",holder.task.title);
-                 intent.putExtra("body",holder.task.body);
-                 intent.putExtra("state",holder.task.state);
+                 intent.putExtra("title",holder.task.getTaskTitle());
+                 intent.putExtra("body",holder.task.getTaskBody());
+                 intent.putExtra("state",holder.task.getTaskState());
                  context.startActivity(intent);
              }
          });

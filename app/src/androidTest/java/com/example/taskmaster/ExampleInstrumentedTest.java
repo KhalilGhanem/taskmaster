@@ -64,7 +64,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void  testRecyclerView(){
         onView(withId(R.id.TasksListRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
-        onView(withId(R.id.TaskDetailTitle)).check(matches(withText("DO Labs")));
+        onView(withId(R.id.TaskDetailTitle)).check(matches(withText("test Amplify")));
 
     }
 
@@ -74,7 +74,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.editTextTextPersonName)).perform(typeText("lab31"),closeSoftKeyboard());
         onView(withId(R.id.editTextTextPersonName2)).perform(typeText("Espresso and Polish"),closeSoftKeyboard());
         onView(withId(R.id.addTaskButton)).perform(click());
-        onView(withId(R.id.TasksListRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(6,click()));
+        onView(withId(R.id.TasksListRecyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(1,click()));
         onView(withId(R.id.TaskDetailTitle)).check(matches(withText("lab31")));
 
     }
