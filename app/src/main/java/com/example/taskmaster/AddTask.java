@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,10 +15,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Todo;
+
 import java.util.List;
 
 public class AddTask extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    AppDatabase appDatabase;
+//    AppDatabase appDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,21 +44,32 @@ public class AddTask extends AppCompatActivity implements AdapterView.OnItemSele
         taskState.setOnItemSelectedListener(this);
 
 
-        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "task").allowMainThreadQueries().build();
-        TaskDao taskDao=appDatabase.taskDao();
-
-        List<Task>allTasks=appDatabase.taskDao().getAll();
-        String total="Total Tasks: ";
-        TextView totalTasks=findViewById(R.id.totalTasks);
-        totalTasks.setText(total+allTasks.size());
+//        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "task").allowMainThreadQueries().build();
+//        TaskDao taskDao=appDatabase.taskDao();
+//
+//        List<Task>allTasks=appDatabase.taskDao().getAll();
+//        String total="Total Tasks: ";
+//        TextView totalTasks=findViewById(R.id.totalTasks);
+//        totalTasks.setText(total+allTasks.size());
 
 
 
         Button addTaskButton=findViewById(R.id.addTaskButton);
         addTaskButton.setOnClickListener(view -> {
-            Task newTask=new Task(taskTitle.getText().toString(),taskBody.getText().toString(),taskState.getSelectedItem().toString());
-            taskDao.insertAll(newTask);
 
+//            Task newTask=new Task(taskTitle.getText().toString(),taskBody.getText().toString(),taskState.getSelectedItem().toString());
+//            taskDao.insertAll(newTask);
+            Todo todo = Todo.builder()
+                    .taskTitle(taskTitle.getText().toString())
+                    .taskBody(taskBody.getText().toString())
+                    .taskState(taskState.getSelectedItem().toString())
+                    .build();
+
+            Amplify.API.mutate(
+                    ModelMutation.create(todo),
+                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+            );
 
             Intent goToHome=new Intent(this,MainActivity.class);
             startActivity(goToHome);

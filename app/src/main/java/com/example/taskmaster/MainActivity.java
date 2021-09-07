@@ -1,5 +1,6 @@
 package com.example.taskmaster;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,19 +9,39 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    AppDatabase appDatabase;
+//    AppDatabase appDatabase;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            // Add these lines to add the AWSApiPlugin plugins
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button addTaskLink=findViewById(R.id.button);
@@ -42,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // recyclerview
-        ArrayList<Task> allTasksList=new ArrayList<Task>();
-        allTasksList.add(new Task("Football","football, also called association football or soccer, game in which two teams of 11 players, using any part of their bodies except their hands and arms, try to maneuver the ball into the opposing team’s goal. Only the goalkeeper is permitted to handle the ball and may do so only within the penalty area surrounding the goal. The team that scores more goals wins.","new"));
-        allTasksList.add(new Task("Do Labs","Working on it...","in progress"));
-        allTasksList.add(new Task("Workout","planning for...","assigned"));
-
-        RecyclerView allTasksRecyclerView=findViewById(R.id.TasksListRecyclerView);
-        allTasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        allTasksRecyclerView.setAdapter(new TaskAdapter(allTasksList,this));
+//        ArrayList<Task> allTasksList=new ArrayList<Task>();
+//        allTasksList.add(new Task("Football","football, also called association football or soccer, game in which two teams of 11 players, using any part of their bodies except their hands and arms, try to maneuver the ball into the opposing team’s goal. Only the goalkeeper is permitted to handle the ball and may do so only within the penalty area surrounding the goal. The team that scores more goals wins.","new"));
+//        allTasksList.add(new Task("Do Labs","Working on it...","in progress"));
+//        allTasksList.add(new Task("Workout","planning for...","assigned"));
+//
+//        RecyclerView allTasksRecyclerView=findViewById(R.id.TasksListRecyclerView);
+//        allTasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        allTasksRecyclerView.setAdapter(new TaskAdapter(allTasksList,this));
 
 
 
@@ -65,16 +86,40 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "task").allowMainThreadQueries().build();
-        List<Task>allTasks=appDatabase.taskDao().getAll();
+        //Room
+//        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "task").allowMainThreadQueries().build();
+//        List<Task>allTasks=appDatabase.taskDao().getAll();
 
-        RecyclerView recyclerView=findViewById(R.id.TasksListRecyclerView);
+
+        //amplify
+        Handler handler=new Handler(Looper.getMainLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message message) {
+                recyclerView.getAdapter().notifyDataSetChanged();
+                return false;
+            }
+        });
+
+        List<Todo>allTasks=new ArrayList<Todo>();
+        recyclerView=findViewById(R.id.TasksListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new TaskAdapter(allTasks,this));
 
+        Amplify.API.query(
+                ModelQuery.list(com.amplifyframework.datastore.generated.model.Todo.class),
+                response -> {
+                    for (Todo todo : response.getData()) {
+                        Log.i("MyAmplifyApp", todo.getTaskTitle());
+                        allTasks.add(todo);
+                    }
+                    handler.sendEmptyMessage(1);
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+
 //        Toast.makeText(getApplicationContext(),"onResume..!",Toast.LENGTH_LONG).show();
 
-        // Task 1
+        // Hardcode Task 1
 //        Button dCC=findViewById(R.id.DoCCButton);
 //        String task1=dCC.getText().toString();
 //        dCC.setOnClickListener(new View.OnClickListener() {

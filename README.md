@@ -29,6 +29,11 @@ An Android app that allow the users to manage their tasks.
 
 * Add Espresso tests
 
+**Lab32:**
+
+* Modify the Add Task pahe to save the data entered in to DynamoDB.
+* Refactor the homepage’s RecyclerView to display all Task entities in DynamoDB.
+
 ## Home Page
 
 ![My Tasks](screenshots/newHome2.jfif)

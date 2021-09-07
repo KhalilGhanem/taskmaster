@@ -1,0 +1,6 @@
+type Todo @model {
+  id: ID!
+  task_title: String!
+  task_body: String!
+  task_state: String!
+}
