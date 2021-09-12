@@ -1,6 +1,12 @@
-type Todo @model {
+type Todo @model @model @key(name: "byTeam", fields: ["teamID"]){
   id: ID!
   task_title: String!
   task_body: String!
   task_state: String!
+}
+
+type Team @model {
+   id: ID!
+   name: String
+   tasks:[Todo] @connection(keyName: "byTeam", fields: ["id"])
 }
