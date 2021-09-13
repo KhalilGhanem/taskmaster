@@ -21,8 +21,10 @@ import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Team;
 import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.ArrayList;
@@ -42,6 +44,20 @@ public class MainActivity extends AppCompatActivity {
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+//        add teams
+//        team1 id:13e28201-9359-4c3e-8ce0-9e919145d9e1
+//        team2 id:42ea03d4-4cd8-4130-88f1-736353286b24
+//        team3 id:f290173a-ec7b-413c-9fa6-a7ba448a6581
+//        for (int i=1;i<4;i++) {
+//            Team team = Team.builder()
+//                    .name("team"+i)
+//                    .build();
+//            Amplify.API.mutate(
+//                    ModelMutation.create(team),
+//                    response -> Log.i("MyAmplifyApp", "Added team  with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+//            );
+//        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button addTaskLink=findViewById(R.id.button);
