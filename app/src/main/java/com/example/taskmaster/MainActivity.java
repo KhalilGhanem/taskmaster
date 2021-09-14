@@ -23,6 +23,9 @@ import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Team;
 import com.amplifyframework.datastore.generated.model.Todo;
@@ -38,12 +41,28 @@ public class MainActivity extends AppCompatActivity {
         try {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
+//            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
+        // sign up do it in a new activity and redirict us into confirm sign up activity.
+//        AuthSignUpOptions options = AuthSignUpOptions.builder()
+//                .userAttribute(AuthUserAttributeKey.email(), "khalil_ghanem7@eyahoo.com")
+//                .build();
+//        Amplify.Auth.signUp("KG", "10521", options,
+//                result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
+//                error -> Log.e("AuthQuickStart", "Sign up failed", error)
+//        );
+        // confirm sign up
+//        Amplify.Auth.confirmSignUp(
+//                "username",
+//                "the code you received via email",
+//                result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+//                error -> Log.e("AuthQuickstart", error.toString())
+//        );
 //        add teams
 //        team1 id:13e28201-9359-4c3e-8ce0-9e919145d9e1
 //        team2 id:42ea03d4-4cd8-4130-88f1-736353286b24
@@ -106,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
 //        appDatabase =  Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "task").allowMainThreadQueries().build();
 //        List<Task>allTasks=appDatabase.taskDao().getAll();
 
+        SharedPreferences sharedPreferences1=PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String taskTeam=sharedPreferences1.getString("teamName","team");
 
         //amplify
         Handler handler=new Handler(Looper.getMainLooper(), new Handler.Callback() {
@@ -117,16 +138,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
         List<Todo>allTasks=new ArrayList<Todo>();
+        List<Team>allTeams=new ArrayList<>();
+
         recyclerView=findViewById(R.id.TasksListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new TaskAdapter(allTasks,this));
 
         Amplify.API.query(
-                ModelQuery.list(com.amplifyframework.datastore.generated.model.Todo.class),
+                ModelQuery.list(com.amplifyframework.datastore.generated.model.Team.class),
                 response -> {
-                    for (Todo todo : response.getData()) {
-                        Log.i("MyAmplifyApp", todo.getTaskTitle());
-                        allTasks.add(todo);
+                    for (Team team : response.getData()) {
+                        Log.i("MyAmplifyApp get team", team.getName());
+                        allTeams.add(team);
+                    }
+                    for (int i=0;i<allTeams.size();i++){
+                        System.out.println("test loop xx"+i);
+                        System.out.println(allTeams.get(i).getName());
+                        System.out.println("test cond" + taskTeam + "::team");
+
+                        System.out.println(allTeams.get(i).getName()==taskTeam);
+                        if (allTeams.get(i).getName().equals(taskTeam)){
+                            allTasks.addAll(allTeams.get(i).getTasks());
+                            Todo task=allTasks.get(0);
+                            System.out.println("test task.....+ "+task.getTaskTitle());
+                            break;
+                        }
                     }
                     handler.sendEmptyMessage(1);
                 },

@@ -9,4 +9,10 @@
         <item>in progress</item>
         <item>complete</item>
     </string-array>
+
+    <string-array name="taskTeam">
+        <item>team1</item>
+        <item>team2</item>
+        <item>team3</item>
+    </string-array>
 </resources>

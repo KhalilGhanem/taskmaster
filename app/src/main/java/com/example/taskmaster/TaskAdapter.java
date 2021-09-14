@@ -54,10 +54,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
          TextView taskTitle=holder.itemView.findViewById(R.id.taskTitleInFragment);
 //         TextView taskBody=holder.itemView.findViewById(R.id.taskBodyInFragment);
          TextView taskState=holder.itemView.findViewById(R.id.taskStateInFragment);
+         TextView taskTeam=holder.itemView.findViewById(R.id.taskTeamInFragment);
 
          taskTitle.setText(holder.task.getTaskTitle());
 //         taskBody.setText(holder.task.body);
          taskState.setText(holder.task.getTaskState());
+         taskTeam.setText(holder.task.getTeam().getName());
 
          holder.itemView.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -66,6 +68,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                  intent.putExtra("title",holder.task.getTaskTitle());
                  intent.putExtra("body",holder.task.getTaskBody());
                  intent.putExtra("state",holder.task.getTaskState());
+                 intent.putExtra("team",holder.task.getTeam().getName());
                  context.startActivity(intent);
              }
          });

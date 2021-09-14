@@ -20,11 +20,13 @@ public class taskFragment extends Fragment {
     private static final String ARG_PARAM1 = "taskTitle";
     private static final String ARG_PARAM2 = "taskBody";
     private static final String ARG_PARAM3 = "taskState";
+    private static final String ARG_PARAM4 = "taskTeam";
 
     // TODO: Rename and change types of parameters
     private String mTaskTitle;
     private String mTaskBody;
     private String mTaskState;
+    private String mTaskTeam;
 
     public taskFragment() {
         // Required empty public constructor
@@ -37,15 +39,17 @@ public class taskFragment extends Fragment {
      * @param mTaskTitle Parameter 1.
      * @param mTaskBody Parameter 2.
      * @param mTaskState Parameter 3.
+     * @param mTaskTeam Parameter 4.
      * @return A new instance of fragment taskFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static taskFragment newInstance(String mTaskTitle, String mTaskBody,String mTaskState) {
+    public static taskFragment newInstance(String mTaskTitle, String mTaskBody,String mTaskState,String mTaskTeam) {
         taskFragment fragment = new taskFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, mTaskTitle);
         args.putString(ARG_PARAM2, mTaskBody);
         args.putString(ARG_PARAM3, mTaskState);
+        args.putString(ARG_PARAM4, mTaskTeam);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,6 +61,7 @@ public class taskFragment extends Fragment {
             mTaskTitle = getArguments().getString(ARG_PARAM1);
             mTaskBody = getArguments().getString(ARG_PARAM2);
             mTaskState = getArguments().getString(ARG_PARAM3);
+            mTaskTeam = getArguments().getString(ARG_PARAM4);
         }
     }
 
