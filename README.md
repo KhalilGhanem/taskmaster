@@ -34,13 +34,20 @@ An Android app that allow the users to manage their tasks.
 * Modify the Add Task pahe to save the data entered in to DynamoDB.
 * Refactor the homepage’s RecyclerView to display all Task entities in DynamoDB.
 
+**Lab33:**
+
+* Update Task model and Create Team model and added three hardcoded teams to DynamoDB.
+* Modify Add Task form to include Radio Buttons for teams.
+* Allow the user to choose their team on the Settings page.
+* Modify RecyclerView and Task Details Page to contain team info.
+
 ## Home Page
 
-![My Tasks](screenshots/newHome2.jfif)
+![My Tasks](screenshots/newHome3.PNG)
 
 ## Add Task Page
 
-![Add Tasks](screenshots/addTask.jfif)
+![Add Tasks](screenshots/addTask3.PNG)
 
 ## All Tasks Page
 
@@ -50,18 +57,14 @@ An Android app that allow the users to manage their tasks.
 
 ![Task Detail](screenshots/taskDetail.jfif)
 
-## Updated Task Detail Page v1
+## Updated Task Detail Page v3
 
-![Task Detail1](screenshots/taskDetail1.jfif)
+![Task Detail1](screenshots/taskDetail3.PNG)
 
 ## Settings Page
 
-![Task Detail](screenshots/settings.jfif)
+![Task Detail](screenshots/SettingPage1.PNG)
 
 ## Updated Task Page
 
 ![Add Tasks](screenshots/addTask1.jfif)
-
-## Updated Task Detail Page v2
-
-![Task Detail1](screenshots/taskDetail2.jfif)

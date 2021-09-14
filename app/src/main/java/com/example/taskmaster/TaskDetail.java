@@ -27,6 +27,7 @@ public class TaskDetail extends AppCompatActivity {
         String taskTitle=intent.getExtras().getString("title");
         String taskStateSt=intent.getExtras().getString("state");
         String taskBodySt=intent.getExtras().getString("body");
+        String taskTeamSt=intent.getExtras().getString("team");
 
 //        String taskTitle=intent.getExtras().getString("TaskTitle");
 //        String taskStateSt=intent.getExtras().getString("TaskState");
@@ -34,10 +35,12 @@ public class TaskDetail extends AppCompatActivity {
         TextView TaskName=findViewById(R.id.TaskDetailTitle);
         TextView taskBody=findViewById(R.id.TaskDetailBody);
         TextView taskState=findViewById(R.id.TaskDetailState);
+        TextView taskeam=findViewById(R.id.TaskDetailTeam);
 
             TaskName.setText(taskTitle);
             taskBody.setText(taskBodySt);
             taskState.setText(taskStateSt);
+            taskeam.setText(taskTeamSt);
 
         Button goHome=findViewById(R.id.TaskDetailHomeButton);
         goHome.setOnClickListener(view -> {
