@@ -25,6 +25,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.cognito.activities.HostedUIRedirectActivity;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Team;
@@ -41,14 +42,21 @@ public class MainActivity extends AppCompatActivity {
         try {
             // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
-//            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
-        // sign up do it in a new activity and redirict us into confirm sign up activity.
+        Amplify.Auth.signInWithWebUI(
+                this,
+                result -> Log.i("AuthQuickStart", result.toString()),
+                error -> Log.e("AuthQuickStart", error.toString())
+        );
+
+
+        // sign up do it in a new activity and redirect us into confirm sign up activity.
 //        AuthSignUpOptions options = AuthSignUpOptions.builder()
 //                .userAttribute(AuthUserAttributeKey.email(), "khalil_ghanem7@eyahoo.com")
 //                .build();
@@ -221,8 +229,52 @@ public class MainActivity extends AppCompatActivity {
         String userName=sharedPreferences.getString("userName","user");
 
         TextView userTasksView=findViewById(R.id.userTasksView);
-        userTasksView.setText(userName+msg);
+        userTasksView.setText(com.amazonaws.mobile.client.AWSMobileClient.getInstance().getUsername()+msg);
 
+
+//        System.out.println(Amplify.Auth.getCurrentUser().getUsername() +"tesssssssssssssst user name from congito");
+//        if (Amplify.Auth.getCurrentUser().getUsername()==null){
+//            userTasksView.setText(userName+msg);
+//        }else {
+//            userTasksView.setText(Amplify.Auth.getCurrentUser().getUsername()+msg);
+//        }
+
+
+
+//        Amplify.Auth.fetchAuthSession(
+//                result ->{ Log.i("AmplifyQuickstart", result.toString());
+//                if ("true".equals(result.toString())){
+//                    userTasksView.setText(Amplify.Auth.getCurrentUser().getUsername()+msg);
+//                }else {
+//                    userTasksView.setText("Guest "+msg);
+//                }
+//                },
+//                error -> Log.e("AmplifyQuickstart", error.toString())
+//        );
+
+        //logout Button
+        Button logoutButton=findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(view -> {
+            Amplify.Auth.signOut(
+                    () ->{ Log.i("AuthQuickstart", "Signed out successfully");
+                        Amplify.Auth.signInWithWebUI(
+                                this,
+                                result -> {Log.i("AuthQuickStart", result.toString());
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                                ,
+                                error -> Log.e("AuthQuickStart", error.toString())
+                        );
+
+                    }
+                    ,
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
+
+//            Intent goToLogin=new Intent(this, HostedUIRedirectActivity.class);
+//            startActivity(goToLogin);
+        });
     }
 
     @Override
