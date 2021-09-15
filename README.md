@@ -41,6 +41,13 @@ An Android app that allow the users to manage their tasks.
 * Allow the user to choose their team on the Settings page.
 * Modify RecyclerView and Task Details Page to contain team info.
 
+**Lab36:**
+
+* Add Cognito to Amplify setup.
+* Add the Amplify pre-built UI for Sign in, Sign up.
+* Display the logged in user’s username in the main activity.
+* Add Logout button to the main activity.
+
 ## Home Page
 
 ![My Tasks](screenshots/newHome3.PNG)
@@ -68,3 +75,15 @@ An Android app that allow the users to manage their tasks.
 ## Updated Task Page
 
 ![Add Tasks](screenshots/addTask1.jfif)
+
+## Sign Up Page
+
+![Signup](screenshots/signupPage.PNG)
+
+## Sign In Page
+
+![Signin](screenshots/LoginPage.PNG)
+
+## Update Home Page
+
+![My Tasks](screenshots/newHome4.PNG)
