@@ -48,6 +48,10 @@ An Android app that allow the users to manage their tasks.
 * Display the logged in user’s username in the main activity.
 * Add Logout button to the main activity.
 
+**Lab38:**
+
+* Add Notifications.
+
 ## Home Page
 
 ![My Tasks](screenshots/newHome3.PNG)
@@ -87,3 +91,7 @@ An Android app that allow the users to manage their tasks.
 ## Update Home Page
 
 ![My Tasks](screenshots/newHome4.PNG)
+
+## Notifications
+
+![Notifications](screenshots/Notifications.PNG)
