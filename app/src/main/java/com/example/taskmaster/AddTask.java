@@ -31,6 +31,16 @@ public class AddTask extends AppCompatActivity implements AdapterView.OnItemSele
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+
+        // Lab41-Intent Filters receive data from another app
+        Intent intent = getIntent();
+        String type = intent.getType();
+        if(type!=null && type.equals("text/plain")){
+            EditText taskDescription=findViewById(R.id.editTextTextPersonName2);
+            taskDescription.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
+        }
+
+
         Button addTask=findViewById(R.id.addTaskButton);
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override

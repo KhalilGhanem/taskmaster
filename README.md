@@ -52,6 +52,10 @@ An Android app that allow the users to manage their tasks.
 
 * Add Notifications.
 
+**Lab41:**
+
+* Add an intent filter which allow users to share text  from another application.
+
 ## Home Page
 
 ![My Tasks](screenshots/newHome3.PNG)
@@ -95,3 +99,9 @@ An Android app that allow the users to manage their tasks.
 ## Notifications
 
 ![Notifications](screenshots/Notifications.PNG)
+
+## Intent Filters
+
+![Intent Filters](screenshots/IntentShare.PNG)
+
+![Intent Filters Data](screenshots/IntentData.PNG)
